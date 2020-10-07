@@ -1,19 +1,19 @@
-from baralho import Baralho
-from mesa import Mesa
-from regras import Regras
 
 class Jogador():
     def __init__(self):
         self.mao = [None, None]
         self.dinheiro = 500
         self.apostaAtual = 0
-        self.noJogo = True
+        self.noJogo = False
         self.naRodada = True
+        self.score = 0
         #nao sei direito o que significa, mas o que to jogando parece indicar quem começa a rodada
         #bb e sb (blinds) são as apostas necessárias para começar o jogo
         self.bb = False
         self.sb = False
         self.d = False
+        #variavel de controle extra, diz se ja foi o dealer durante o jogo
+        self.jD = False
         
         self.allIn = False
         self.vencedorRodada = False
@@ -22,8 +22,9 @@ class Jogador():
         self.mao = [None, None]
         self.dinheiro = 500
         self.apostaAtual = 0
-        self.noJogo = True
+        self.noJogo = False
         self.naRodada = True
+        self.score = 0
         #nao sei direito o que significa, mas o que to jogando parece indicar quem começa a rodada
         #bb e sb (blinds) são as apostas necessárias para começar o jogo
         self.bb = False
@@ -35,9 +36,23 @@ class Jogador():
     
     def foraDoJogo(self):
         self.noJogo = False
+    
+    def entrarNoJogo(self):
+        self.noJogo = True
+    
+    def novaRodada(self):
+        self.mao = [None, None]
+        self.removeToken()
+        self.vencedorRodada = False
+        self.allIn = False
+        self.score = 0
+        if self.dinheiro <= 0:
+            self.foraDoJogo()
+    
+    def venceuRodada(self):
+        self.vencedorRodada = True
 
     def mostrarMao(self):
-        print("Jogador %d:" % (self.numero),end=' ')
         for i in range (0,2):
             print(self.mao[i], end=' ')
         print()
@@ -56,6 +71,9 @@ class Jogador():
         self.bb = False
         self.sb = False
         self.d = True
+    
+    def setFD(self):
+        self.fD = True
 
     def removeToken(self):
         self.bb = False

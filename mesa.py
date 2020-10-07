@@ -1,3 +1,4 @@
+
 class Mesa():
     def __init__(self):
         self.cartas = [None, None, None, None, None]
@@ -26,6 +27,7 @@ class Mesa():
             for i in range(0,5):
                 print(self.cartas[i], end=' ')
             print()
+    
     def distribuirDinheiro(self, regras):
         k = 0
         dist = []
