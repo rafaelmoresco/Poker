@@ -1,3 +1,7 @@
+from baralho import Baralho
+from mesa import Mesa
+from regras import Regras
+
 class Jogador():
     def __init__(self):
         self.mao = [None, None]
@@ -70,8 +74,8 @@ class Jogador():
             if self.dinheiro <= 0:
                 self.allIn = True
         else:
-            self.dinheiro -= mesa.apostaMaior - 
-            mesa.dinheiroTotal += 
+            self.dinheiro -= mesa.apostaMaior - x
+            mesa.dinheiroTotal += x
             self.apostaAtual = mesa.apostaMaior + x
             if self.dinheiro <= 0:
                 self.allIn = True
