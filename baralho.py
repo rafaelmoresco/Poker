@@ -1,5 +1,8 @@
 import random
 
+from pokereval.card import Card
+from pokereval.hand_evaluator import HandEvaluator
+
 class Baralho():
     def __init__(self, bar):
         self.baralho = bar

@@ -9,7 +9,7 @@ class Mesa():
     def reset(self):
         self.cartas = [None, None, None, None, None]
         self.apostaMaior = 0
-        self.dinheiroTotal = 0
+        self.dinheiroTotal = 500
         self.mostrar = 0
     
     def mostrarCartas(self):
@@ -28,14 +28,14 @@ class Mesa():
                 print(self.cartas[i], end=' ')
             print()
     
-    def distribuirDinheiro(self, regras):
+    def distribuirDinheiro(self, j):
         k = 0
         dist = []
-        for i in regras.listaJogadores:
-            if regras.listaJogadores[i].vencedorRodada:
+        for i in range(len(j)):
+            if j[i].vencedorRodada == True:
                 k += 1
                 dist.append(i)
         temp = self.dinheiroTotal%k
         dinheiroDist = (self.dinheiroTotal-temp)/k
-        for i in dist:
-            regras.listaJogadores[dist[i]].dinheiro += dinheiroDist
+        for i in range(len(dist)):
+           j[dist[i]].dinheiro += dinheiroDist
