@@ -50,6 +50,7 @@ while True:
         for i in range (0, nj):
             j[i].entrarNoJogo()
         #controle de cada partida
+        rodada = 0
         while jogo:
             baralho.reset(bar)
             mesa.reset()
@@ -61,15 +62,10 @@ while True:
             for i in range(0,nj):
                 print("Jogador %d:" % (i+1))
                 j[i].mostrarMao()
+            regras.posicao(rodada)
             regras.pontuacao(j, mesa)
             mesa.distribuirDinheiro(j)
             for i in range(0,nj):
                 print("Jogador %d: %d" % (i+1, j[i].dinheiro))
-            ''' acho que esse sitema nao vai funcionar
-            for i in range(len(regras.listaJogadores)):
-                if regras.listaJogadores[i].fD == False:
-                    regras.listaJogadores[i].setD()
-                    regras.listaJogadores[i].setFD()
-                    break
-            '''
+            rodada += 1
             jogo = False

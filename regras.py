@@ -11,8 +11,15 @@ class Regras():
             if j[k].noJogo:
                 self.listaJogadores.append(j[k])
 
-    def posicao(self):
-        for i in self.listaJogadores:
+    def posicao(self, rodada):
+        if rodada > len(self.listaJogadores):
+            rodada = 0
+        for i in range(len(self.listaJogadores)):
+            if i == rodada:
+                self.listaJogadores[i].d = True
+            else:
+                self.listaJogadores[i].removeToken()
+        for i in range(len(self.listaJogadores)):
             if self.listaJogadores[i].d == True:
                 self.listaJogadores[i-1].setSB()
                 self.listaJogadores[i-2].setBB()
