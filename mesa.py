@@ -9,7 +9,7 @@ class Mesa():
     def reset(self):
         self.cartas = [None, None, None, None, None]
         self.apostaMaior = 0
-        self.dinheiroTotal = 500
+        self.dinheiroTotal = 0
         self.mostrar = 0
     
     def mostrarCartas(self):

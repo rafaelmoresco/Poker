@@ -1,6 +1,6 @@
 
 class Jogador():
-    def __init__(self):
+    def __init__(self,n):
         self.mao = [None, None]
         self.dinheiro = 500
         self.apostaAtual = 0
@@ -13,7 +13,8 @@ class Jogador():
         self.sb = False
         self.d = False
         #variavel de controle extra, diz se ja foi o dealer durante o jogo
-        self.jD = False
+        self.cobriu = False
+        self.n = n
         
         self.allIn = False
         self.vencedorRodada = False
@@ -30,6 +31,7 @@ class Jogador():
         self.bb = False
         self.sb = False
         self.d = False
+        self.cobriu = False
         
         self.allIn = False
         self.vencedorRodada = False
@@ -42,8 +44,8 @@ class Jogador():
     
     def novaRodada(self):
         self.mao = [None, None]
-        self.removeToken()
         self.vencedorRodada = False
+        self.naRodada = True
         self.allIn = False
         self.score = 0
         if self.dinheiro <= 0:
@@ -81,8 +83,11 @@ class Jogador():
         self.d = False
     
     def aposta(self, mesa, x):
-      self.dinheiro -= x
-      mesa.dinheiroTotal += x
+        self.dinheiro -= x
+        self.apostaAtual = x
+        mesa.dinheiroTotal += x
+        if mesa.apostaMaior < x:
+            mesa.apostaMaior = x
     #função para aumentar a aposta na mesa
     def aumentarAposta(self, mesa, x):
         if self.apostaAtual == mesa.apostaMaior:
@@ -104,6 +109,7 @@ class Jogador():
             self.allIn = True
             self.dinheiro = 0
         self.dinheiro -= mesa.apostaMaior - self.apostaAtual
+        mesa.dinheiroTotal += mesa.apostaMaior - self.apostaAtual
         self.apostaAtual = mesa.apostaMaior
     
     def desistir(self):
