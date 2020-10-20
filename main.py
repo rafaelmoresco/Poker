@@ -20,6 +20,7 @@ for k in range(1,9):
     player = Jogador(k)
     j.append(player)
 baralho = Baralho(bar)
+baralho2 = Baralho(bar)
 mesa = Mesa()
 regras = Regras()
 
@@ -46,7 +47,21 @@ while True:
         while jogo:
             for i in range(0, len(j)):
                 j[i].novaRodada()
+            jSobrando = 0
+            for i in range(0, len(j)):
+                if j[i].noJogo:
+                    jSobrando += 1
+            if jSobrando < 2:
+                jogo = False
+            
+            #cria um baralho novo
+            bars = [Card(2,"s"),Card(3,"s"),Card(4,"s"),Card(5,"s"),Card(6,"s"),Card(7,"s"),Card(8,"s"),Card(9,"s"),Card(10,"s"),Card("J","s"),Card("Q","s"),Card("K","s"),Card("A","s")]
+            barh = [Card(2,"h"),Card(3,"h"),Card(4,"h"),Card(5,"h"),Card(6,"h"),Card(7,"h"),Card(8,"h"),Card(9,"h"),Card(10,"h"),Card("J","h"),Card("Q","h"),Card("K","h"),Card("A","h")]
+            barc = [Card(2,"c"),Card(3,"c"),Card(4,"c"),Card(5,"c"),Card(6,"c"),Card(7,"c"),Card(8,"c"),Card(9,"c"),Card(10,"c"),Card("J","c"),Card("Q","c"),Card("K","c"),Card("A","c")]
+            bard = [Card(2,"d"),Card(3,"d"),Card(4,"d"),Card(5,"d"),Card(6,"d"),Card(7,"d"),Card(8,"d"),Card(9,"d"),Card(10,"d"),Card("J","d"),Card("Q","d"),Card("K","d"),Card("A","d")]
+            bar = bars + barh + barc + bard
             baralho.reset(bar)
+            
             mesa.reset()
             baralho.shuffle()
             regras.lista(j)
